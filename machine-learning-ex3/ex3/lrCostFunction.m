@@ -38,7 +38,7 @@ grad = zeros(size(theta));
 
 h = sigmoid(X*theta);
 
-J = 1/m*((-y'*log(h) - (1-y)'*log(1-h))) + lambda/2/m*(sum(theta.*theta)-theta(1)*theta(1));
+J = 1/m*((-y.*log(h) - (1-y).*log(1-h))) + lambda/2/m*(sum(theta.*theta)-theta(1)*theta(1));
 grad = (sum(bsxfun(@times, h-y, X))/m)' + lambda/m*theta;
 grad(1) = sum(bsxfun(@times, h-y, X(1)))/m;
 

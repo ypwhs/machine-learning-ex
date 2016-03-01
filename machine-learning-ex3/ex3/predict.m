@@ -22,12 +22,12 @@ p = zeros(size(X, 1), 1);
 %
 
 X = [ones(m, 1) X];
-out1 = sigmoid(X*Theta1');
-out1 = [ones(m, 1) out1];
-out2 = sigmoid(out1*Theta2');
+a1 = sigmoid(X*Theta1');
+a1 = [ones(m, 1) a1];
+a2 = sigmoid(a1*Theta2');
 
 for i=1:m
-    [~, I] = max(out2(i,:), [], 2);
+    [~, I] = max(a2(i,:), [], 2);
     p(i) = I;
 end
 
