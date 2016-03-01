@@ -37,9 +37,8 @@ m = size(X, 1);
 
 % Randomly select 100 data points to display
 sel = randperm(size(X, 1));
-sel = sel(1:100);
 
-displayData(X(sel, :));
+displayData(X(sel(1:100), :));
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -144,7 +143,7 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 fprintf('\nChecking Backpropagation... \n');
 
 %  Check gradients by running checkNNGradients
-checkNNGradients;
+% checkNNGradients;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -159,7 +158,7 @@ fprintf('\nChecking Backpropagation (w/ Regularization) ... \n')
 
 %  Check gradients by running checkNNGradients
 lambda = 3;
-checkNNGradients(lambda);
+% checkNNGradients(lambda);
 
 % Also output the costFunction debugging values
 debug_J  = nnCostFunction(nn_params, input_layer_size, ...
@@ -188,11 +187,14 @@ options = optimset('MaxIter', 50);
 %  You should also try different values of lambda
 lambda = 1;
 
+Train_X = X(sel(1:4900), :);
+Train_y = y(sel(1:4900), :);
+
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
-                                   num_labels, X, y, lambda);
+                                   num_labels, Train_X, Train_y, lambda);
 
 % Now, costFunction is a function that takes in only one argument (the
 % neural network parameters)
@@ -216,7 +218,8 @@ pause;
 
 fprintf('\nVisualizing Neural Network... \n')
 
-displayData(Theta1(:, 2:end));
+figure;displayData(Theta1(:, 2:end));
+figure;displayData(Theta2(:, 2:end));
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -227,8 +230,10 @@ pause;
 %  neural network to predict the labels of the training set. This lets
 %  you compute the training set accuracy.
 
-pred = predict(Theta1, Theta2, X);
+Test_X = X(sel(4901:end), :);
+Test_y = y(sel(4901:end), :);
+pred = predict(Theta1, Theta2, Test_X);
 
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == Test_y)) * 100);
 
 

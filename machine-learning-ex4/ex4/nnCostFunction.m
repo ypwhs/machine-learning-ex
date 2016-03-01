@@ -62,9 +62,7 @@ m = size(X, 1);
 %               and Theta2_grad from Part 2.
 %
 
-X = [ones(m, 1) X];
-
-z2 = Theta1*X';
+z2 = Theta1*[ones(m, 1) X]';
 a2 = [ones(1, m); sigmoid(z2)];
 z3 = Theta2*a2;
 a3 = sigmoid(z3);
@@ -88,7 +86,7 @@ for i=1:m
     delta3 = a3(:,i) - yy(:,i);
     delta2 = theta2'*delta3.*sigmoidGradient(z2(:,i));
     Theta2_grad = Theta2_grad + delta3*a2(:,i)';
-    Theta1_grad = Theta1_grad + delta2*X(i,:);
+    Theta1_grad = Theta1_grad + delta2*[1 X(i,:)];
 end
 
 
