@@ -23,10 +23,18 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
-
-
-
-
+tests = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+means = zeros(8);
+for a=1:8
+    for b=1:8
+        model= svmTrain(X, y, tests(a), @(x1, x2) gaussianKernel(x1, x2, tests(b)));
+        predictions = svmPredict(model, Xval);
+        means(a,b) = mean(double(predictions ~= yval));
+    end
+end
+[a, b] = find(means==min(min(means)));
+C = tests(a);
+sigma = tests(b);
 
 
 % =========================================================================

@@ -33,7 +33,9 @@ fprintf('5x5 Identity Matrix: \n');
 warmUpExercise()
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+X = [ones(20,1) (exp(1) + exp(2) * (0.1:0.1:2))'];
+y = X(:,2) + sin(X(:,1)) + cos(X(:,2));
+theta = [0.5 -0.5]';pause;
 
 
 %% ======================= Part 2: Plotting =======================
@@ -75,6 +77,7 @@ plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
 hold off % don't overlay any more plots on this figure
 
+
 % Predict values for population sizes of 35,000 and 70,000
 predict1 = [1, 3.5] *theta;
 fprintf('For population = 35,000, we predict a profit of %f\n',...
@@ -90,8 +93,8 @@ pause;
 fprintf('Visualizing J(theta_0, theta_1) ...\n')
 
 % Grid over which we will calculate J
-theta0_vals = linspace(-10, 10, 100);
-theta1_vals = linspace(-1, 4, 100);
+theta0_vals = linspace(0, 1, 1000);
+theta1_vals = linspace(0, 2, 1000);
 
 % initialize J_vals to a matrix of 0's
 J_vals = zeros(length(theta0_vals), length(theta1_vals));

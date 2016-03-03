@@ -17,11 +17,8 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
     
-    deltatheta = ones(size(theta, 1), 1);
-    for i = 1:size(theta, 1)
-        deltatheta(i) = alpha*sum((X*theta-y).*X(:,i))/m;
-    end
-    theta = theta - deltatheta;
+    deltatheta = alpha/m*(X*theta-y)'*X;
+    theta = theta - deltatheta';
     
     if (iter > 2) && (J_history(iter-1) - J_history(iter-2) > 0)
         break;

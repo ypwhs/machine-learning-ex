@@ -187,8 +187,8 @@ options = optimset('MaxIter', 50);
 %  You should also try different values of lambda
 lambda = 1;
 
-Train_X = X(sel(1:4900), :);
-Train_y = y(sel(1:4900), :);
+Train_X = X(sel(1:4000), :);
+Train_y = y(sel(1:4000), :);
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
@@ -230,8 +230,8 @@ pause;
 %  neural network to predict the labels of the training set. This lets
 %  you compute the training set accuracy.
 
-Test_X = X(sel(4901:end), :);
-Test_y = y(sel(4901:end), :);
+Test_X = X(sel(4001:end), :);
+Test_y = y(sel(4001:end), :);
 pred = predict(Theta1, Theta2, Test_X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == Test_y)) * 100);
