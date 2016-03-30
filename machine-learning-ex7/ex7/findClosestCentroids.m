@@ -21,8 +21,14 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+m = size(X, 1);
+dis = zeros(m, K);
 
+for i=1:K
+    dis(:,i) = sum(bsxfun(@minus, X, centroids(i,:)).^2, 2);
+end
 
+[~, idx] = min(dis, [], 2);
 
 
 

@@ -14,7 +14,7 @@ centroids = zeros(K, size(X, 2));
 %
 
 
-
+centroids = rand(K, size(X, 2));
 
 
 
